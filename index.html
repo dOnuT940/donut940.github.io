@@ -1,7 +1,46 @@
-<html>
+<html lang="en-US">
      <head>
+          <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
+          <meta http-equiv="expires" content="Sat, 31 Oct 2014 00:00:00 GMT" />
+          <meta http-equiv="pragma" content="no-cache">
+          <link rel="icon" type="image/x-icon" href="favicon.ico" />
+          <link href="style.css" rel="stylesheet">
+          <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+          <script language="javascript" type="text/javascript" src="sketch.js"></script>
+          <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+          <script src="update.js"></script>
+          <title>BBQ Thermal Tracker</title>
      </head>
      <body>
-          <h1>github pages</h1>
+          <div class="page">
+               <div class="header">BBQ Thermal Tracker</div>
+               <!--INFO BODY-->
+               <div class="list" id="list">
+                    <div class="lblval" id="mainlabels">
+                         <div class="power" id="power-text">Power <img id="arduinopic" src="pics/arduino-pic.png" alt="" height="58" width="86" /></div>
+                         <div class="temp" id="temp-text">Temperature</div>
+                         <div class="fan" id="fan-text">Fan <img id="fanpic" src="pics/fan_54x54.png" alt="" height="54" width="54" /></div>
+                         <div class="target" id="target-text">Target</div>
+                         <div class="refresh" id="refresh-text">Refresh</div>
+                    </div>
+                    <div class="lblval" id="mainvalues">
+                         <div class="power"><span id="power-value" class="value">&nbsp;&nbsp;&nbsp;</span></div>
+                         <div class="temp"><span id="temp-value" class="value">&nbsp;</span></div>
+                         <div class="fan"><span id="fan-value" class="value">&nbsp;</span></div>
+                         <div class="target"><span id="target-value" class="value">&nbsp;</span></div>
+                         <div class="refresh"><span id="refresh-value" class="value">&nbsp;</span></div>
+                    </div>
+               </div>
+               <div class="errordiv" id="errordiv"><span class="error-output" id="error-output"></span></div>
+               <div class="footer" id="divfoot">
+                    <footer class="footer" id="footer">
+                         <ul class="footer" id="ulfoot">
+                              <li class="footertitle" id="titlefooter"><a class="footerlink" id="footerlinktitle" onclick="returnHome()">BBQ Thermal Tracker</a></li>
+                              <li class="footerli" id="project"><a class="footerlink" id="footerlinkproject" target="_blank" href="">Open-Source Project</a></li>
+                              <li class="footerli" id="sources"><a class="footerlink" id="footerlinksources" target="_blank" href="https://www.w3schools.com/">Sources</a></li>
+                         </ul>
+                    </footer>
+               </div>
+          </div>
      </body>
 </html>
