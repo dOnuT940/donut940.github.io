@@ -1,41 +1,35 @@
-//GREEN Connection HEX #1BA957
-//RED Connection HEX #C3272B
-
 var power; //Arduino Power Status Boolean
 var temp; //temperature reading
 var fanStatus; //Fan Status Boolean
 var targetTemp; //Target temperature
-
 var countdown = 10; //Seconds before refresh
 var i = 1; //Fan Rotate Counter
-var timeStampLoad = new Date(); //Time Stamp of Page Load
+var timeStamp = new Date();
 
-
-function setup() {
-     noCanvas(); //REMOVE CANVAS DOM ELEMENT
+window.onload = function() { //WAIT FOR PAGE LOAD
      showCountdown(); //START REFRESH COUNTDOWN
-     setTimeStamp("footertime");
-}
-
-function draw() {
-     setTimeout(function() {rotateFan()}, 125);
+     loadJSONFile(); //INITIAL JSON REQUEST
+     setInterval(function() {loadJSONFile();}, 10000);
+     setInterval(function() {rotateFan();}, 55.555);
 }
 
 function showCountdown() { //REFRESH COUNTDOWN IN HTML
      var elem = document.getElementById('refresh-value');
      countdown--; //Subtract 1 per
      if (countdown >= 0) {
-          setTimeout(showCountdown, 1000);
-          elem.innerHTML = countdown;
+          var countdownLoop = setTimeout(showCountdown, 1000);
+          elem.innerHTML = countdown.toString();
      }
      else {
-          window.location.reload(true); //FORCES RELOAD FROM SERVER
+          countdown = 10; //RESET LOOP COUNTER
+          window.clearTimeout(countdownLoop);
+          showCountdown();
      }
 }
 
 function rotateFan() { //SPIN FAN ANIMATION IN HTML
      var fan = document.getElementById('fanpic');
-     if (fanStatus === true && i < 19) {
+     if (fanStatus === true && i < 18) {
           var degree = i * 20;
           var value = "rotate(" + degree + "deg)";
           fan.style.transform = value;
@@ -44,6 +38,7 @@ function rotateFan() { //SPIN FAN ANIMATION IN HTML
           return false;
      }
      else if (i >= 19) {
+          fan.style.transform = "rotate(0deg)";
           i = 1;
           return true;
      }
@@ -53,7 +48,6 @@ function rotateFan() { //SPIN FAN ANIMATION IN HTML
 function changeVal(t, v) {
      var strBuild = t + "-value";
      var targetID = document.getElementById(strBuild);
-
      if (t === "power") { //POWER VAL CHANGE
           if (v === true) {
                targetID.style.backgroundColor = "#1BA957";
@@ -112,7 +106,9 @@ function returnHome() {
 function setTimeStamp(elemId) {
      //SETS TIMESTAMP OFF PAGE LOAD
      var elem = document.getElementById(elemId);
-     if (elemId !== undefined || elemId !== null) {
-          elem.innerHTML = "Load Stamp: " + timeStampLoad.toTimeString();
+     var time = new Date();
+     timeStamp = time;
+     if (elemId) {
+          elem.innerHTML = "Load Stamp: " + timeStamp.toTimeString();
      }
 }
